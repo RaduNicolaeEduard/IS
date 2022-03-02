@@ -35,7 +35,7 @@ jobs:
         run: |
           mkdir builds
           ls
-          cp frontend.zip build/
+          cp frontend.zip builds/
       
       - name: Push Build to Releases
         uses: ncipollo/release-action@v1
