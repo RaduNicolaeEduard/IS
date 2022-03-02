@@ -29,4 +29,4 @@ jobs:
       - name: Build angular app
         run: |
           cd Frontend/IS && npm install
-          cd Frontend/IS && ng build
+          ng build
