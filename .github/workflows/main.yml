@@ -33,7 +33,6 @@ jobs:
           args: zip -qq -r frontend.zip . -i dist
       - name: copy
         run: |
-          cd ../../
           pwd
           mkdir builds
           cp Frontend/IS/frontend.zip .
