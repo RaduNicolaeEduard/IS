@@ -30,3 +30,8 @@ jobs:
         run: |
           cd Frontend/IS && npm install
           npm run build:prod
+      - name: Push Build to Releases
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "dist/IS/*"
+          token: ${{ secrets.TOKEN }}
