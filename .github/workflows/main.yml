@@ -30,11 +30,12 @@ jobs:
           npm run build:prod
       - uses: montudor/action-zip@v1
         with:
-          args: zip -qq -r frontend.zip . -i dist
+          args: zip -qq -r frontend.zip Frontend/IS/dist
       - name: copy
         run: |
           pwd
           mkdir builds
+          ls
           cp Frontend/IS/frontend.zip .
       
       - name: Push Build to Releases
