@@ -33,9 +33,9 @@ jobs:
           args: zip -qq -r frontend.zip Frontend/IS/dist
       - name: copy
         run: |
-          pwd
           mkdir builds
-          frontend.zip build/
+          ls
+          cp frontend.zip build/
       
       - name: Push Build to Releases
         uses: ncipollo/release-action@v1
