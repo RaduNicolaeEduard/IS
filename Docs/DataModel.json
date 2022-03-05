@@ -1,0 +1,70 @@
+Message Api /message
+Request
+{
+    "user":"Ted",
+    "sessionId":"fpiahgioheaigahoia",
+    "message":"How are you",
+    "timeStamp":"unixTimeStamp"
+}
+Response
+{
+    "user":"Ted",
+    "sessionId":"fpiahgioheaigahoia",
+    "response":"I am good",
+    "timeStamp":"unixTimeStamp"
+}
+
+
+
+
+Get All Sessions Api /getAllSessions
+Request
+{
+    "user":"Ted"
+}
+Response
+[
+    {
+        "sessionId":"fpiahgioheaigahoia",
+        "user":"Ted",
+        "lastUpdated":"unixTimestamp",
+        "createdAt":"unixTimestamp",
+        "chat":[
+            {
+                "user":"Ted",
+                "sessionId":"fpiahgioheaigahoia",
+                "message":"How are you",
+                "timeStamp":"unixTimeStamp"
+            },
+            {
+                "user":"Ted",
+                "sessionId":"fpiahgioheaigahoia",
+                "response":"I am good",
+                "timeStamp":"unixTimeStamp"
+            }
+        ]
+    },
+    {...}
+]
+
+
+
+
+Delete Session Api /delSession
+Request
+{
+    "user":"Ted",
+    "sessionId":"fpiahgioheaigahoia"
+}
+
+
+
+Create Session /createSession
+Request
+{
+    "user":"Ted",
+}
+Response
+{
+    "sessionId":"fpiahgioheaigahoiasad"
+}
