@@ -1,0 +1,18 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Is project Backend",
+  "main": "index.js",
+  "scripts": {
+    "train": "node train.js",
+    "start": "node index.js"
+  },
+  "author": "Radu Nicolae, Ciuca Vlad, Lospa Sofia",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.17.3",
+    "node-nlp": "^4.23.4",
+    "redis": "^4.0.6"
+  }
+}
