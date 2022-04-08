@@ -7,9 +7,11 @@ const path = require('path')
 const redis = require('redis')
 const app = express()
 app.use(bodyParser.json())
+const cors = require('cors');
 const port = 3000
 var jsonParser = bodyParser.json()
 const manager = new NlpManager({ languages: ["en"] });
+app.use(cors())
 const redisClient = redis.createClient({
     url: 'redis://localhost:3001'
 })
@@ -27,63 +29,63 @@ app.get('/', (req, res) => {
         }
         AI_TURBO_ENHANCED_CHAT_BOT_ULTRA(req.query.message).then((response) => {
             if (response == undefined) {
-                res.send({ "response": "That didn't make sense for me!", "message": req.query.message, "status": "WARN" })
+                res.json({ "response": "That didn't make sense for me!", "message": req.query.message, "status": "WARN" })
                 return
             }
-            res.send({ "response": response, "message": req.query.message, "status": "OK" })
+            res.json({ "response": response, "message": req.query.message, "status": "OK" })
         })
     } catch (error) {
-        res.send({ "response": "Something went sideways!", "message": req.query.message, "status": "ERROR" })
+        res.json({ "response": "Something went sideways!", "message": req.query.message, "status": "ERROR" })
     }
 })
 app.get('/trainmodel', (req, res) => {
     exec("npm run train", (error, stdout) => {
         if (error) {
             console.log(`error: ${error.message}`);
-            res.send({ "response": error.message, "message": req.query.message, "status": "ERROR" })
+            res.json({ "response": error.message, "message": req.query.message, "status": "ERROR" })
             return;
         }
-        res.send({ "response": stdout, "message": req.query.message, "status": "OK" })
+        res.json({ "response": stdout, "message": req.query.message, "status": "OK" })
         console.log(`stdout: ${stdout}`);
     });
 })
 app.get('/reloadmng', (req, res) => {
     manager.load()
-    res.send({ "status": "OK" })
+    res.json({ "status": "OK" })
 })
 app.get('/testredis', async (req, res) => {
     const value = await redisClient.get("name")
-    res.send(value)
+    res.json(value)
 })
 
 app.get('/reinit', async (req, res) => {
     init()
-    res.send({ "status": "OK" })
+    res.json({ "status": "OK" })
 })
 
 app.get('/intents', async (req, res) => {
     intents = await redisClient.sMembers('intents')
-    res.send({ "intents": intents, "status": "OK" })
+    res.json({ "intents": intents, "status": "OK" })
 })
 
 app.post('/intents', jsonParser, async (req, res) => {
     await redisClient.del('intents')
     await redisClient.sAdd('intents', req.body)
     // await redisClient.sAdd('intents', req.query.intent)
-    res.send({ "status": "OK" })
+    res.json({ "status": "OK" })
 })
 
 app.delete('/intents', async (req, res) => {
     intents = req.query.intents;
     await redisClient.del('intents')
     await redisClient.sAdd('intents', intents)
-    res.send({ "status": "OK" })
+    res.json({ "status": "OK" })
 })
 
 app.get('/intent', async (req, res) => {
     let answers = await redisClient.sMembers(`${req.query.intent}_questions`)
     let questions = await redisClient.sMembers(`${req.query.intent}_answers`)
-    res.send({ "intent": { "questions": questions, "answers": answers }, "status": "OK" })
+    res.json({ "intent": { "questions": questions, "answers": answers }, "status": "OK" })
 })
 app.post('/intent', jsonParser, async (req, res) => {
     intent = req.query.intent
@@ -92,11 +94,11 @@ app.post('/intent', jsonParser, async (req, res) => {
     await redisClient.del(`${intent}_answers`)
     redisClient.sAdd(`${intent}_questions`, data.questions)
     redisClient.sAdd(`${intent}_answers`, data.answers)
-    res.send({ "status": "OK" })
+    res.json({ "status": "OK" })
 })
 app.post('/save', jsonParser, async (req, res) => {
     await wiriteToFiles()
-    res.send({ "status": "OK" })
+    res.json({ "status": "OK" })
 })
 app.listen(port, () => {
     console.log(`AI_TURBO_ENHANCED_CHAT_BOT_ULTRA app listening on port ${port}`)

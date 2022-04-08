@@ -1,13 +1,36 @@
-<p>
-  <mat-toolbar>
-  <span>Ingenierie des systemes</span>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-   <mat-icon>share</mat-icon>
- </button>
-</mat-toolbar>
-</p>
-<router-outlet></router-outlet>
+<nb-layout>
+
+  <nb-layout-header fixed>
+      <span>Ingenierie des systemes</span>
+      <span class="example-spacer"></span>
+
+  <!-- Insert header here -->
+  </nb-layout-header>
+
+  <nb-layout-column>
+    <router-outlet></router-outlet>
+    <nb-chat style="max-height:76vh" title="Security Bot">
+      <nb-chat-message *ngFor="let msg of messages"
+                       [type]="msg.type"
+                       [message]="msg.text"
+                       [reply]="msg.reply"
+                       [sender]="msg.user.name"
+                       [date]="msg.date"
+                       [files]="msg.files"
+                       [quote]="msg.quote"
+                       [latitude]="msg.latitude"
+                       [longitude]="msg.longitude"
+                       [avatar]="msg.user.avatar">
+  </nb-chat-message>
+
+  <nb-chat-form (send)="sendMessage($event)">
+  </nb-chat-form>
+</nb-chat>
+    
+  </nb-layout-column>
+
+  <nb-layout-footer fixed>
+<p style="margin:0">made with <mat-icon style="font-size: 10px;width:10px;">favorite</mat-icon> by Nicolae, Sofia and Ciuca</p>
+  </nb-layout-footer>
+
+</nb-layout>
