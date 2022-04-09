@@ -1,0 +1,12 @@
+<h1 mat-dialog-title></h1>
+<div mat-dialog-content>
+  <p>Add a new intent?</p>
+  <mat-form-field appearance="outline">
+    <mat-label>Intent Name</mat-label>
+    <input matInput [(ngModel)]="data.animal">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Add</button>
+</div>

@@ -70,7 +70,7 @@ app.get('/intents', async (req, res) => {
 
 app.post('/intents', jsonParser, async (req, res) => {
     await redisClient.del('intents')
-    await redisClient.sAdd('intents', req.body)
+    await redisClient.sAdd('intents', req.body.intents)
     // await redisClient.sAdd('intents', req.query.intent)
     res.json({ "status": "OK" })
 })
@@ -83,21 +83,32 @@ app.delete('/intents', async (req, res) => {
 })
 
 app.get('/intent', async (req, res) => {
-    let answers = await redisClient.sMembers(`${req.query.intent}_questions`)
-    let questions = await redisClient.sMembers(`${req.query.intent}_answers`)
-    res.json({ "intent": { "questions": questions, "answers": answers }, "status": "OK" })
+    let questions = await redisClient.sMembers(`${req.query.intent}_questions`)
+    let answers = await redisClient.sMembers(`${req.query.intent}_answers`)
+    res.json({ "intent": { "questions": questions, "answers": answers },"intentkey":req.query.intent, "status": "OK" })
 })
 app.post('/intent', jsonParser, async (req, res) => {
     intent = req.query.intent
     data = req.body
+    console.log(intent)
+    console.log(data)
     await redisClient.del(`${intent}_questions`)
     await redisClient.del(`${intent}_answers`)
     redisClient.sAdd(`${intent}_questions`, data.questions)
     redisClient.sAdd(`${intent}_answers`, data.answers)
     res.json({ "status": "OK" })
 })
-app.post('/save', jsonParser, async (req, res) => {
+app.get('/save', jsonParser, async (req, res) => {
     await wiriteToFiles()
+    exec("npm run train", (error, stdout) => {
+        if (error) {
+            console.log(`error: ${error.message}`);
+            res.json({ "response": error.message, "message": req.query.message, "status": "ERROR" })
+            return;
+        }
+        manager.load()
+        console.log(`stdout: ${stdout}`);
+    });
     res.json({ "status": "OK" })
 })
 app.listen(port, () => {

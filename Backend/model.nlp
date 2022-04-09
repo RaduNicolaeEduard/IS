@@ -41,16 +41,20 @@
             "intent": "greetings.bye",
             "domain": "default"
           },
-          "later,see,you": {
+          "bye,for,now": {
             "intent": "greetings.bye",
             "domain": "default"
           },
-          "bye,for,now": {
+          "later,see,you": {
             "intent": "greetings.bye",
             "domain": "default"
           },
           "go,i,must": {
             "intent": "greetings.bye",
+            "domain": "default"
+          },
+          "howdi": {
+            "intent": "greetings.hello",
             "domain": "default"
           },
           "hey": {
@@ -65,18 +69,27 @@
             "intent": "greetings.hello",
             "domain": "default"
           },
-          "howdi": {
+          "greet": {
             "intent": "greetings.hello",
             "domain": "default"
           },
-          "greet": {
-            "intent": "greetings.hello",
+          "how,is,the,weather": {
+            "intent": "greetings.weather",
+            "domain": "default"
+          },
+          "weather": {
+            "intent": "greetings.weather",
+            "domain": "default"
+          },
+          "how,is,it,today": {
+            "intent": "greetings.weather",
             "domain": "default"
           }
         },
         "intentDict": {
           "greetings.bye": "default",
-          "greetings.hello": "default"
+          "greetings.hello": "default",
+          "greetings.weather": "default"
         },
         "sentences": [
           {
@@ -91,18 +104,23 @@
           },
           {
             "domain": "default",
-            "utterance": "see you later",
+            "utterance": "bye for now",
             "intent": "greetings.bye"
           },
           {
             "domain": "default",
-            "utterance": "bye for now",
+            "utterance": "see you later",
             "intent": "greetings.bye"
           },
           {
             "domain": "default",
             "utterance": "i must go",
             "intent": "greetings.bye"
+          },
+          {
+            "domain": "default",
+            "utterance": "howdy",
+            "intent": "greetings.hello"
           },
           {
             "domain": "default",
@@ -121,13 +139,23 @@
           },
           {
             "domain": "default",
-            "utterance": "howdy",
+            "utterance": "Greetings",
             "intent": "greetings.hello"
           },
           {
             "domain": "default",
-            "utterance": "Greetings",
-            "intent": "greetings.hello"
+            "utterance": "how is the weather",
+            "intent": "greetings.weather"
+          },
+          {
+            "domain": "default",
+            "utterance": "weather",
+            "intent": "greetings.weather"
+          },
+          {
+            "domain": "default",
+            "utterance": "how is it today",
+            "intent": "greetings.weather"
           }
         ],
         "domains": {
@@ -148,23 +176,30 @@
               "bye": 1,
               "take": 1,
               "care": 1,
+              "for": 1,
+              "now": 1,
               "see": 1,
               "you": 1,
               "later": 1,
-              "for": 1,
-              "now": 1,
               "i": 1,
               "must": 1,
               "go": 1,
+              "howdi": 1,
               "hey": 1,
               "hello": 1,
               "hi": 1,
-              "howdi": 1,
-              "greet": 1
+              "greet": 1,
+              "how": 1,
+              "is": 1,
+              "the": 1,
+              "weather": 1,
+              "it": 1,
+              "today": 1
             },
             "intents": {
               "greetings.bye": 1,
-              "greetings.hello": 1
+              "greetings.hello": 1,
+              "greetings.weather": 1
             },
             "intentFeatures": {
               "greetings.bye": {
@@ -172,21 +207,29 @@
                 "bye": 1,
                 "take": 1,
                 "care": 1,
+                "for": 1,
+                "now": 1,
                 "see": 1,
                 "you": 1,
                 "later": 1,
-                "for": 1,
-                "now": 1,
                 "i": 1,
                 "must": 1,
                 "go": 1
               },
               "greetings.hello": {
+                "howdi": 1,
                 "hey": 1,
                 "hello": 1,
                 "hi": 1,
-                "howdi": 1,
                 "greet": 1
+              },
+              "greetings.weather": {
+                "how": 1,
+                "is": 1,
+                "the": 1,
+                "weather": 1,
+                "it": 1,
+                "today": 1
               }
             },
             "featuresToIntent": {
@@ -202,6 +245,12 @@
               "care": [
                 "greetings.bye"
               ],
+              "for": [
+                "greetings.bye"
+              ],
+              "now": [
+                "greetings.bye"
+              ],
               "see": [
                 "greetings.bye"
               ],
@@ -209,12 +258,6 @@
                 "greetings.bye"
               ],
               "later": [
-                "greetings.bye"
-              ],
-              "for": [
-                "greetings.bye"
-              ],
-              "now": [
                 "greetings.bye"
               ],
               "i": [
@@ -226,6 +269,9 @@
               "go": [
                 "greetings.bye"
               ],
+              "howdi": [
+                "greetings.hello"
+              ],
               "hey": [
                 "greetings.hello"
               ],
@@ -235,11 +281,26 @@
               "hi": [
                 "greetings.hello"
               ],
-              "howdi": [
-                "greetings.hello"
-              ],
               "greet": [
                 "greetings.hello"
+              ],
+              "how": [
+                "greetings.weather"
+              ],
+              "is": [
+                "greetings.weather"
+              ],
+              "the": [
+                "greetings.weather"
+              ],
+              "weather": [
+                "greetings.weather"
+              ],
+              "it": [
+                "greetings.weather"
+              ],
+              "today": [
+                "greetings.weather"
               ]
             },
             "neuralNetwork": {
@@ -259,64 +320,109 @@
                 "bye",
                 "take",
                 "care",
+                "for",
+                "now",
                 "see",
                 "you",
                 "later",
-                "for",
-                "now",
                 "i",
                 "must",
                 "go",
+                "howdi",
                 "hey",
                 "hello",
                 "hi",
-                "howdi",
-                "greet"
+                "greet",
+                "how",
+                "is",
+                "the",
+                "weather",
+                "it",
+                "today"
               ],
               "intents": [
                 "greetings.bye",
-                "greetings.hello"
+                "greetings.hello",
+                "greetings.weather"
               ],
               "perceptrons": [
                 [
-                  10.655360221862793,
-                  5.451540946960449,
-                  2.7258830070495605,
-                  2.7258830070495605,
-                  3.6340839862823486,
-                  3.6340839862823486,
-                  3.6340839862823486,
-                  2.7254769802093506,
-                  2.7254769802093506,
-                  3.6339879035949707,
-                  3.6339879035949707,
-                  3.6339879035949707,
-                  -3.349532127380371,
-                  -3.3389246463775635,
-                  -3.327672004699707,
-                  -3.315784215927124,
-                  -3.303272247314453,
-                  3.3704737761202557
+                  11.230586051940918,
+                  5.648414611816406,
+                  2.8242149353027344,
+                  2.8242149353027344,
+                  2.8241593837738037,
+                  2.8241593837738037,
+                  3.7655282020568848,
+                  3.7655282020568848,
+                  3.7655282020568848,
+                  3.7655155658721924,
+                  3.7655155658721924,
+                  3.7655155658721924,
+                  -2.983947992324829,
+                  -2.9811196327209473,
+                  -2.9779882431030273,
+                  -2.974551200866699,
+                  -2.9708032608032227,
+                  -1.0916606187820435,
+                  -1.0916606187820435,
+                  -0.45546793937683105,
+                  -2.970353126525879,
+                  -0.5332632064819336,
+                  -0.5332632064819336,
+                  2.9857254533916473
                 ],
                 [
-                  -7.545308589935303,
-                  -3.8930552005767822,
-                  -1.9467310905456543,
-                  -1.9467310905456543,
-                  -2.5950753688812256,
-                  -2.5950753688812256,
-                  -2.5950753688812256,
-                  -1.9461348056793213,
-                  -1.9461348056793213,
-                  -2.594961643218994,
-                  -2.594961643218994,
-                  -2.594961643218994,
-                  6.454254627227783,
-                  6.466789245605469,
-                  6.451608180999756,
-                  6.435225009918213,
-                  6.417652130126953,
-                  7.798052089247758
+                  -6.837353229522705,
+                  -3.4484498500823975,
+                  -1.7242358922958374,
+                  -1.7242358922958374,
+                  -1.7241414785385132,
+                  -1.7241414785385132,
+                  -2.298827886581421,
+                  -2.298827886581421,
+                  -2.298827886581421,
+                  -2.298806667327881,
+                  -2.298806667327881,
+                  -2.298806667327881,
+                  7.3731689453125,
+                  7.374210357666016,
+                  7.367833614349365,
+                  7.360764026641846,
+                  7.352991580963135,
+                  -2.16678524017334,
+                  -2.16678524017334,
+                  -0.767742931842804,
+                  -6.860682487487793,
+                  -1.2845877408981323,
+                  -1.2845877408981323,
+                  6.900066722809187
+                ],
+                [
+                  -1.7871243953704834,
+                  -0.9212683439254761,
+                  -0.4557056427001953,
+                  -0.4557056427001953,
+                  -0.4508778750896454,
+                  -0.4508778750896454,
+                  -0.6075422763824463,
+                  -0.6075422763824463,
+                  -0.6075422763824463,
+                  -0.6074092984199524,
+                  -0.6074092984199524,
+                  -0.6074092984199524,
+                  -1.7802095413208008,
+                  -1.7753517627716064,
+                  -1.770305871963501,
+                  -1.7650725841522217,
+                  -1.7596518993377686,
+                  1.7197340726852417,
+                  1.7197340726852417,
+                  -2.727184534072876,
+                  11.981406211853027,
+                  4.456746578216553,
+                  4.456746578216553,
+                  1.8328087127572414
                 ]
               ]
             }
@@ -336,15 +442,19 @@
       ],
       [
         "en",
-        "see you later"
-      ],
-      [
-        "en",
         "bye for now"
       ],
       [
         "en",
+        "see you later"
+      ],
+      [
+        "en",
         "i must go"
+      ],
+      [
+        "en",
+        "howdy"
       ],
       [
         "en",
@@ -360,11 +470,19 @@
       ],
       [
         "en",
-        "howdy"
+        "Greetings"
       ],
       [
         "en",
-        "Greetings"
+        "how is the weather"
+      ],
+      [
+        "en",
+        "weather"
+      ],
+      [
+        "en",
+        "how is it today"
       ]
     ]
   },
@@ -384,12 +502,38 @@
       "en": {
         "greetings.bye": [
           {
-            "answer": "shit"
+            "answer": "have a great day"
+          },
+          {
+            "answer": "see you soon!"
+          },
+          {
+            "answer": "bye bye"
+          },
+          {
+            "answer": "Till next time"
           }
         ],
         "greetings.hello": [
           {
-            "answer": "FUCK OFF"
+            "answer": "Greetings"
+          },
+          {
+            "answer": "Hello"
+          },
+          {
+            "answer": "Hi"
+          },
+          {
+            "answer": "Hey there!"
+          }
+        ],
+        "greetings.weather": [
+          {
+            "answer": "very nice"
+          },
+          {
+            "answer": "it is nice outside"
           }
         ]
       }

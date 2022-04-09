@@ -1,15 +1,1 @@
-{
-    "questions": [
-        "hello",
-        "hey",
-        "howdy",
-        "hi",
-        "Greetings"
-    ],
-    "answers": [
-        "Hello",
-        "Hi",
-        "Greetings",
-        "Hey there!"
-    ]
-}
+{"questions":["howdy","hey","hello","hi","Greetings"],"answers":["Greetings","Hello","Hi","Hey there!"]}
