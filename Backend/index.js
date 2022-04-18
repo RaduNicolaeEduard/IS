@@ -13,7 +13,7 @@ var jsonParser = bodyParser.json()
 const manager = new NlpManager({ languages: ["en"] });
 app.use(cors())
 const redisClient = redis.createClient({
-    url: 'redis://localhost:3001'
+    url: 'redis://redis:6379'
 })
 redisClient.connect()
 redisClient.flushAll()
