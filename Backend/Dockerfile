@@ -1,5 +1,5 @@
 FROM node:16
-
+RUN apt update -y && apt install tesseract-ocr -y
 # Create app directory
 WORKDIR /usr/src/app
 

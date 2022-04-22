@@ -11,6 +11,9 @@ const cors = require('cors');
 const port = 3000
 var jsonParser = bodyParser.json()
 const manager = new NlpManager({ languages: ["en"] });
+const fileUpload = require("express-fileupload")
+const Tesseract = require("tesseract.js")
+app.use(fileUpload())
 app.use(cors())
 const redisClient = redis.createClient({
     url: 'redis://redis:6379'
@@ -21,7 +24,32 @@ init()
 manager.load();
 
 redisClient.set("name", "Flavio")
-
+app.post("/upload", async (req, res) => {
+    console.log(req.files.busyboy)
+    let sampleFile = await req.files.busyboy
+    if (!sampleFile) return res.status(400).send("No files were uploaded.")
+    try {
+      const { data } = await Tesseract.recognize(sampleFile.data, "spa+eng", {
+        logger: (m) => console.log(m),
+      })
+      let splitedText = data.text.split("\n")
+      let count = 15;
+      let newText = [] 
+      splitedText.forEach(element => {
+          if(count <= 0 ) return;
+          newText.push(element);
+      });
+      AI_TURBO_ENHANCED_CHAT_BOT_ULTRA(newText.join("\n")).then((response) => {
+        if (response == undefined) {
+            res.json({ "response": "That didn't make sense for me!", "message": req.query.message, "status": "WARN" })
+            return
+        }
+        res.json({ "response": response, "message": req.query.message, "status": "OK" })
+      })
+    } catch (error) {
+      throw error
+    }
+  })
 app.get('/', (req, res) => {
     try {
         if (req.query.message == undefined) {
@@ -41,6 +69,7 @@ app.get('/', (req, res) => {
 app.get('/trainmodel', (req, res) => {
     exec("npm run train", (error, stdout) => {
         if (error) {
+
             console.log(`error: ${error.message}`);
             res.json({ "response": error.message, "message": req.query.message, "status": "ERROR" })
             return;
