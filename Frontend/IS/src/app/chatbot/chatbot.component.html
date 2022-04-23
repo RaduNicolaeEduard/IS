@@ -1,0 +1,29 @@
+    <div style="position:relative">
+          <nb-chat style="height:70vh;" title="Security Bot">
+            <nb-chat-message *ngFor="let msg of messages" [type]="msg.type" [message]="msg.text" [reply]="msg.reply"
+              [sender]="msg.user.name" [date]="msg.date" [files]="msg.files"
+              [avatar]="msg.user.avatar">
+            </nb-chat-message>
+            
+            <nb-chat-form (send)="sendMessage($event)" [(ngModel)]="form" [dropFiles]="true">
+            </nb-chat-form>
+            
+          </nb-chat>
+          <div style="position: absolute;top:0.5em;right: 3em;">
+            <button nbButton ghost (click)="fileInput.click()" status="primary" style="margin-right: 1em;"><nb-icon icon="file-add-outline"></nb-icon>
+              <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
+            </button>
+            <button nbButton ghost (click)="callAPI()" status="primary"><nb-icon icon="camera-outline"></nb-icon></button>
+          </div>
+    </div>
+  <ng-template #callAPIDialog>
+    <webcam *ngIf="!error" [height]="300"
+    [width]="300"
+    [trigger]="imageTrigger"
+    (imageCapture)="captureImage($event)"
+    (initError)="handleInitError($event)"></webcam>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-raised-button style="background-color: #3366FF;color:white;" (click)="triggerSnapshot()" [disabled]="!!error">Capture</button>
+    </mat-dialog-actions>
+  </ng-template>

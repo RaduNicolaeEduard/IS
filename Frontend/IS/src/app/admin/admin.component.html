@@ -1,0 +1,57 @@
+<div style="margin-left:auto;padding:1em;">
+    <button mat-raised-button  (click)="openDialog()">Add Intent</button>
+    <button style="margin-left:1em;" mat-raised-button (click)="retrainModel()">Retrain Model</button>
+  </div>
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let intent of intents; let i = index;trackBy: trackByFn"
+      [attr.data-index]="i">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{intent.intentkey}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div style="display:flex">
+        <h3>Questions</h3>
+        <button style="margin-left:auto" (click)="addIntent(i,'question',intent.intentkey)" mat-mini-fab
+           aria-label="Example icon button with a menu icon">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div style="display:flex ;flex-wrap: wrap;">
+        <p style="margin-left:1em;margin-right:1em"
+          *ngFor="let item of intents[i].intent.questions; let x = index;trackBy: trackByFn"
+          [attr.data-index]="x">
+          <mat-form-field appearance="outline">
+            <mat-label>Question</mat-label>
+            <input [(ngModel)]="intents[i].intent.questions[x]" (blur)="updatedIntent(intent.intentkey,i)"
+              matInput type="text">
+            <button mat-icon-button matSuffix (click)="deleteIntent(i,'question',x,intent.intentkey)">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </p>
+      </div>
+      <div style="display:flex">
+        <h3>Answers</h3>
+        <button style="margin-left:auto" (click)="addIntent(i,'answer',intent.intentkey)" mat-mini-fab
+           aria-label="Example icon button with a menu icon">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <div style="display:flex ;flex-wrap: wrap;">
+        <p style="margin-left:1em;margin-right:1em"
+          *ngFor="let item of intents[i].intent.answers; let y = index ;trackBy: trackByFn"
+          [attr.data-index]="y">
+          <mat-form-field appearance="outline">
+            <mat-label>Answers</mat-label>
+            <input [(ngModel)]="intents[i].intent.answers[y]" (blur)="updatedIntent(intent.intentkey,i)"
+              matInput type="text">
+            <button mat-icon-button matSuffix (click)="deleteIntent(i,'answer',y,intent.intentkey)">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </p>
+      </div>
+    </mat-expansion-panel>
+
+  </mat-accordion>

@@ -2,8 +2,8 @@ version: '3'
 services:
   api:
     build: ./Backend
-    ports:
-      - "3000:3000"
+    expose:
+      - 3000
     container_name: api
     links:
       - redis
@@ -20,7 +20,31 @@ services:
     image: redis:6.2-alpine
     container_name: redis
     restart: always
-    ports:
-      - '6379:6379'
+    expose:
+      - 6370
     command: redis-server
-  
+  postgres:
+    image: postgres:13.2
+    restart: unless-stopped
+    container_name: postgres
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+  keycloak:
+    depends_on:
+      - postgres
+    container_name: keycloak
+    environment:
+      DB_VENDOR: postgres
+      DB_ADDR: postgres
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      KEYCLOAK_USER: system 
+      KEYCLOAK_PASSWORD: system
+      DB_PASSWORD: keycloak
+      PROXY_ADDRESS_FORWARDING: true
+    image: jboss/keycloak:13.0.0
+    expose:
+      - 8080
+    restart: unless-stopped
