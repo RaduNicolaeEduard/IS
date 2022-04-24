@@ -3,6 +3,7 @@
   <nb-layout-header fixed>
     <span>{{ 'NAVBAR.TITLE' | translate }}</span>
     <span class="example-spacer"></span>
+    <nb-search type="rotate-layout"></nb-search>
     <button nbButton ghost *ngIf="themeState=='default'" (click)="themeChange('dark')" status="primary"><nb-icon icon="moon-outline"></nb-icon></button>
     <button nbButton ghost *ngIf="themeState=='dark'" (click)="themeChange('default')" status="primary"><nb-icon icon="sun-outline"></nb-icon></button>
     <nb-form-field>
@@ -13,7 +14,7 @@
         <nb-option value="cr">{{ 'NAVBAR.CR' | translate }}</nb-option>
       </nb-select>
     </nb-form-field>
-    <button nbButton ghost routerLink="/">{{ 'NAVBAR.CHATBOT' | translate }}</button>
+    <button *ngIf="loggedIn" nbButton ghost routerLink="/">{{ 'NAVBAR.CHATBOT' | translate }}</button>
     <button *ngIf="loggedIn" nbButton ghost routerLink="/admin">{{ 'NAVBAR.ADMIN' | translate }}</button>
     <button nbButton ghost (click)="openBottomSheet()">{{ 'NAVBAR.ACCOUNT' | translate }}</button>
   </nb-layout-header>

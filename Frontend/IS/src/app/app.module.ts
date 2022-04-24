@@ -4,7 +4,7 @@ import {MaterialModule} from '../modules/material/material.module'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule,NbDialogModule,NbSelectModule, NbLayoutModule, NbChatModule,NbButtonModule, NbTabsetModule,NbIconModule, NbCardModule, NbFormFieldModule, NbInputModule } from '@nebular/theme';
+import { NbThemeModule,NbDialogModule,NbSelectModule, NbLayoutModule, NbChatModule,NbButtonModule, NbTabsetModule,NbIconModule, NbCardModule, NbFormFieldModule, NbInputModule, NbSearchModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -44,7 +44,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    
+    NbSearchModule,
     NbDialogModule.forRoot(),
     MatButtonModule,
     MatIconModule,
