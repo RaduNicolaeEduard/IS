@@ -1,0 +1,37 @@
+{
+    "NAVBAR":{
+        "TITLE":"系统工程",
+        "CHATBOT":"聊天机器人",
+        "ADMIN":"行政",
+        "ACCOUNT":"帐户",
+        "FOOTERSTART":"用",
+        "FOOTEREND":"尼古拉、索非亚和丘卡",
+        "RO":"罗马尼亚语",
+        "CR":"中国人",
+        "FR":"法语",
+        "EN":"英语"
+    },
+    "CHATBOT": {
+      "SELECT": "改变语言"
+    },
+    "CANCEL":"取消",
+    "CLOSE":"关闭",
+    "CAPTURE":"捕获",
+    "LOGIN":"登录",
+    "LOGOUT":"登出",
+    "GDPR":{
+      "TITLE":"允许切斯?",
+      "DENY":"否定",
+      "ALLOW":"允许",
+      "MESSAGE":"本网站存储等数据以启用基本的网站功能"
+    },
+    "ADMIN":{
+      "QUESTION":"问题",
+      "QUESTIONS":"问题",
+      "ANSWER":"回答",
+      "ANSWERS":"回答",
+      "ADDINTENT":"添加意图",
+      "RETAINMODEL":"重新训练模型"
+    }
+  }
+  

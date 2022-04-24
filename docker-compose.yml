@@ -14,6 +14,7 @@ services:
     build: ./Frontend/IS
     ports:
       - "80:80"
+      - "443:443"
     container_name: web
     restart: always
   redis:
@@ -35,7 +36,10 @@ services:
     depends_on:
       - postgres
     container_name: keycloak
+    volumes:
+      - ./keycloak/is-realm.json:/tmp/is-realm.json
     environment:
+      KEYCLOAK_IMPORT: /tmp/is-realm.json
       DB_VENDOR: postgres
       DB_ADDR: postgres
       DB_DATABASE: keycloak

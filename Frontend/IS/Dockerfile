@@ -1,7 +1,10 @@
 FROM node:16 AS builder
 WORKDIR /app
 COPY . .
-RUN npm i && npm run build
+COPY .env .
+RUN npm install -g ts-node
+RUN npm install
+RUN npm run build:prod
 
 FROM nginx:alpine
 COPY default.conf /etc/nginx/conf.d/default.conf

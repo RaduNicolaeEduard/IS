@@ -7,8 +7,8 @@ export function initializeKeycloak(
       keycloak.init({
         config: {
           url: 'http://localhost' + '/auth',
-          realm: 'test',
-          clientId: 'fronted',
+          realm: 'IS',
+          clientId: 'Frontend',
         },
         initOptions: {
             //   onLoad: 'login-required',

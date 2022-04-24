@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "build:prod": "./node_modules/.bin/ng build",
+    "config": "ts-node ./scripts/setenv.ts",
+    "build:prod": "npm run config -- --environment=prod && ./node_modules/.bin/ng build --aot --build-optimizer=true  --output-hashing=all --stats-json",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
@@ -23,10 +24,13 @@
     "@angular/router": "~13.0.0",
     "@nebular/eva-icons": "9.0.2",
     "@nebular/theme": "^9.0.2",
+    "@ngx-translate/core": "^14.0.0",
+    "@ngx-translate/http-loader": "^7.0.0",
     "ajax": "0.0.4",
     "eva-icons": "^1.1.2",
     "keycloak-angular": "^9.1.0",
     "keycloak-js": "^16.1.1",
+    "ngx-cookie-service": "^13.2.0",
     "ngx-webcam": "^0.4.1",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
@@ -39,12 +43,14 @@
     "@schematics/angular": "~13.0.1",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "dotenv": "^16.0.0",
     "jasmine-core": "~3.10.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.4.3"
+    "typescript": "~4.4.3",
+    "yargs": "^17.4.0"
   }
 }

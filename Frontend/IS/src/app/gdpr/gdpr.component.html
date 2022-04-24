@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{ "GDPR.TITLE" | translate }}</h2>
+<mat-dialog-content class="mat-typography">
+  {{ "GDPR.MESSAGE" | translate }}
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="false">
+    {{ "GDPR.DENY" | translate }}
+  </button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
+    {{ "GDPR.ALLOW" | translate }}
+  </button>
+</mat-dialog-actions>

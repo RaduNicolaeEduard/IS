@@ -1,0 +1,18 @@
+{
+    "NAVBAR":{
+        "TITLE":"Ingénierie système",
+        "CHATBOT":"Chatbot",
+        "ADMIN":"Administrateur",
+        "ACCOUNT":"Compte",
+        "FOOTERSTART":"Fabriqué avec",
+        "FOOTEREND":"par Nicolae, Sofia et Ciuca",
+        "RO":"Roumain",
+        "FR":"Français",
+        "EN":"Anglais"
+    },
+    "CHATBOT": {
+      "TITLE": "Hello Angular with ngx-translate!",
+      "SELECT": "Change language"
+    }
+  }
+  

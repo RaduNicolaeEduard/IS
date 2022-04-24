@@ -1,0 +1,37 @@
+{
+    "NAVBAR":{
+        "TITLE":"Systems engineering",
+        "CHATBOT":"Chatbot",
+        "ADMIN":"Admin",
+        "ACCOUNT":"Account",
+        "FOOTERSTART":"Made with",
+        "FOOTEREND":"by Nicolae, Sofia and Ciuca",
+        "RO":"Romainan",
+        "FR":"French",
+        "EN":"English"
+    },
+    "CHATBOT": {
+      "TITLE": "Hello Angular with ngx-translate!",
+      "SELECT": "Change language"
+    },
+    "CANCEL":"Cancel",
+    "CLOSE":"Close",
+    "CAPTURE":"Capture",
+    "LOGIN":"Log In",
+    "LOGOUT":"Log Out",
+    "GDPR":{
+      "TITLE":"Allow Cokies?",
+      "DENY":"Deny",
+      "ALLOW":"Allow",
+      "MESSAGE":"This website stores data such as cookies to enable essential site functionality"
+    },
+    "ADMIN":{
+      "QUESTION":"Question",
+      "QUESTIONS":"Questions",
+      "ANSWER":"Answer",
+      "ANSWERS":"Answers",
+      "ADDINTENT":"Add intent",
+      "RETAINMODEL":"Retrain model"
+    }
+  }
+  

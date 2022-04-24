@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { WebcamImage, WebcamInitError } from 'ngx-webcam';
 import { catchError, map, Observable, Subject, throwError } from 'rxjs';
 import { NewintencomponentComponent } from '../newintencomponent/newintencomponent.component';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -23,6 +23,7 @@ export class AdminComponent implements OnInit {
   @ViewChild('callAPIDialog') callAPIDialog: any;
   intentsList: any = [];
   form:any;
+  loading:boolean = false;
   title = 'IS';
   intents: Array<any> = []
   messages: any[] = [
@@ -95,12 +96,12 @@ export class AdminComponent implements OnInit {
 }
   init() {
     this.intents = [];
-    this.httpClient.get<any>(`http://localhost/api/intents`).subscribe(intents => {
+    this.httpClient.get<any>(`${environment.BASE_PATH}/api/intents`).subscribe(intents => {
       intents = JSON.parse(JSON.stringify(intents.intents))
       this.intentsList = intents;
       for (let i = 0; i < intents.length; i++) {
         const intentkey = String(intents[i]);
-        this.httpClient.get<any>(`http://localhost/api/intent?intent=${intentkey}`).subscribe(intent => {
+        this.httpClient.get<any>(`${environment.BASE_PATH}/api/intent?intent=${intentkey}`).subscribe(intent => {
           // 
           // 
           this.intents.push(intent);
@@ -118,7 +119,7 @@ export class AdminComponent implements OnInit {
       
       if (result) {
         const body = { intents: [...this.intentsList, result] }
-        this.httpClient.post<any>(`http://localhost/api/intents`, body)
+        this.httpClient.post<any>(`${environment.BASE_PATH}/api/intents`, body)
           .subscribe(data => {
             
             this.init()
@@ -129,15 +130,17 @@ export class AdminComponent implements OnInit {
     });
   }
   retrainModel(){
-    this.httpClient.get<any>(`http://localhost/api/save`)
+    this.loading=true
+    this.httpClient.get<any>(`${environment.BASE_PATH}/api/save`)
     .subscribe(data => {
+      this.loading=false
       
     }
     );
   }
   updatedIntent(intent: any, intentIndex: any) {
     const body = this.intents[intentIndex].intent;
-    this.httpClient.post<any>(`http://localhost/api/intent?intent=${intent}`, body)
+    this.httpClient.post<any>(`${environment.BASE_PATH}/api/intent?intent=${intent}`, body)
       .subscribe(data => console.log(data));
   }
   addIntent(intentIndex: any, type: any, intent: any) {
@@ -176,7 +179,7 @@ export class AdminComponent implements OnInit {
     this.sendMessage({"files":event.target.files,"message":""})
   }
   upload(data:any) {
-    const url = `http://localhost/api/upload`;
+    const url = `${environment.BASE_PATH}/api/upload`;
     let input = new FormData();
     input.append('busyboy', data);   // "url" as the key and "data" as value
     return this.httpClient.post(url, input).pipe(map((resp: any) => resp));
@@ -217,7 +220,7 @@ export class AdminComponent implements OnInit {
       },
     });
     let text = String(event.message)
-    this.httpClient.get<any>(`http://localhost/api?message=${text}`).subscribe(data => {
+    this.httpClient.get<any>(`${environment.BASE_PATH}/api?message=${text}`).subscribe(data => {
       
       this.messages.push({
         text: data.response,

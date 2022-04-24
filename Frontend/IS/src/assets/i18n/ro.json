@@ -1,0 +1,18 @@
+{
+    "NAVBAR":{
+        "TITLE":"Ingineria Sistemelor",
+        "CHATBOT":"Chatbot",
+        "ADMIN":"Administrator",
+        "ACCOUNT":"Cont",
+        "FOOTERSTART":"Facut cu",
+        "FOOTEREND":"de Nicolae, Sofia și Ciuca",
+        "RO":"Romana",
+        "FR":"Franceza",
+        "EN":"Engleza"
+    },
+    "CHATBOT": {
+      "TITLE": "Hello Angular with ngx-translate!",
+      "SELECT": "Change language"
+    }
+  }
+  

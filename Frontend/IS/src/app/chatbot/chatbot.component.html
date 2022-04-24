@@ -1,4 +1,5 @@
     <div style="position:relative">
+      <mat-progress-bar mode="indeterminate" style="position: absolute;z-index: 1000;" *ngIf="loading"></mat-progress-bar>
           <nb-chat style="height:70vh;" title="Security Bot">
             <nb-chat-message *ngFor="let msg of messages" [type]="msg.type" [message]="msg.text" [reply]="msg.reply"
               [sender]="msg.user.name" [date]="msg.date" [files]="msg.files"
@@ -23,7 +24,7 @@
     (imageCapture)="captureImage($event)"
     (initError)="handleInitError($event)"></webcam>
     <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Cancel</button>
-      <button mat-raised-button style="background-color: #3366FF;color:white;" (click)="triggerSnapshot()" [disabled]="!!error">Capture</button>
+      <button mat-button mat-dialog-close>{{ 'CANCEL' | translate }}</button>
+      <button mat-raised-button style="background-color: #3366FF;color:white;" (click)="triggerSnapshot()" [disabled]="!!error">{{ 'CAPTURE' | translate }}</button>
     </mat-dialog-actions>
   </ng-template>

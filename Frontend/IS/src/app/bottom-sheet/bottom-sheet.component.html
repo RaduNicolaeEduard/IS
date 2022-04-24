@@ -1,10 +1,9 @@
 <mat-nav-list>
-    <a mat-list-item (click)="login()">
-      <span mat-line>Login</span>
-    </a>
-  
-    <a mat-list-item (click)="logout()">
-      <span mat-line>Logout</span>
-    </a>
+  <a mat-list-item (click)="login()">
+    <span mat-line>{{ "LOGIN" | translate }}</span>
+  </a>
 
-  </mat-nav-list>
+  <a mat-list-item (click)="logout()">
+    <span mat-line>{{ "LOGOUT" | translate }}</span>
+  </a>
+</mat-nav-list>

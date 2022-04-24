@@ -1,6 +1,9 @@
+<mat-spinner style="position: absolute;  top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);z-index: 1000;" *ngIf="loading"></mat-spinner>
 <div style="margin-left:auto;padding:1em;">
-    <button mat-raised-button  (click)="openDialog()">Add Intent</button>
-    <button style="margin-left:1em;" mat-raised-button (click)="retrainModel()">Retrain Model</button>
+    <button mat-raised-button  (click)="openDialog()">{{ "ADMIN.ADDINTENT" | translate }}</button>
+    <button style="margin-left:1em;" mat-raised-button (click)="retrainModel()">{{ "ADMIN.RETAINMODEL" | translate }}</button>
   </div>
 <mat-accordion>
     <mat-expansion-panel *ngFor="let intent of intents; let i = index;trackBy: trackByFn"
@@ -11,7 +14,7 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div style="display:flex">
-        <h3>Questions</h3>
+        <h3>{{ "ADMIN.QUESTIONS" | translate }}</h3>
         <button style="margin-left:auto" (click)="addIntent(i,'question',intent.intentkey)" mat-mini-fab
            aria-label="Example icon button with a menu icon">
           <mat-icon>add</mat-icon>
@@ -22,7 +25,7 @@
           *ngFor="let item of intents[i].intent.questions; let x = index;trackBy: trackByFn"
           [attr.data-index]="x">
           <mat-form-field appearance="outline">
-            <mat-label>Question</mat-label>
+            <mat-label>{{ "ADMIN.QUESTION" | translate }}</mat-label>
             <input [(ngModel)]="intents[i].intent.questions[x]" (blur)="updatedIntent(intent.intentkey,i)"
               matInput type="text">
             <button mat-icon-button matSuffix (click)="deleteIntent(i,'question',x,intent.intentkey)">
@@ -32,7 +35,7 @@
         </p>
       </div>
       <div style="display:flex">
-        <h3>Answers</h3>
+        <h3>{{ "ADMIN.ANSWERS" | translate }}</h3>
         <button style="margin-left:auto" (click)="addIntent(i,'answer',intent.intentkey)" mat-mini-fab
            aria-label="Example icon button with a menu icon">
           <mat-icon>add</mat-icon>
@@ -43,7 +46,7 @@
           *ngFor="let item of intents[i].intent.answers; let y = index ;trackBy: trackByFn"
           [attr.data-index]="y">
           <mat-form-field appearance="outline">
-            <mat-label>Answers</mat-label>
+            <mat-label>{{ "ADMIN.ANSWER" | translate }}</mat-label>
             <input [(ngModel)]="intents[i].intent.answers[y]" (blur)="updatedIntent(intent.intentkey,i)"
               matInput type="text">
             <button mat-icon-button matSuffix (click)="deleteIntent(i,'answer',y,intent.intentkey)">

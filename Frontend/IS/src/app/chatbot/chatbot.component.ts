@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { WebcamImage, WebcamInitError } from 'ngx-webcam';
 import { catchError, map, Observable, Subject, throwError } from 'rxjs';
 import { NewintencomponentComponent } from '../newintencomponent/newintencomponent.component';
-
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-chatbot',
@@ -24,6 +24,7 @@ export class ChatbotComponent implements OnInit {
   @ViewChild('callAPIDialog') callAPIDialog: any;
   intentsList: any = [];
   form:any;
+  loading:boolean = false;
   title = 'IS';
   intents: Array<any> = []
   messages: any[] = [
@@ -42,6 +43,7 @@ export class ChatbotComponent implements OnInit {
     this.dialogRef.afterClosed().subscribe((result:any) => {
       var file = this.dataURLtoFile(result,'hello.png');
       if(file != undefined){
+        this.loading = true;
         this.messages.push({
           text: "File Question",
           files: [ { url: 'https://picsum.photos/320/240/?image=387', type: 'image/jpeg' } ],
@@ -54,6 +56,7 @@ export class ChatbotComponent implements OnInit {
         });
         this.upload(file).subscribe(
           data => {
+            this.loading = false;
             this.messages.push({
               text: data.response,
               date: new Date(),
@@ -95,20 +98,6 @@ export class ChatbotComponent implements OnInit {
     return new File([u8arr], filename, {type:mime});
 }
   init() {
-    this.intents = [];
-    this.httpClient.get<any>(`http://localhost/api/intents`).subscribe(intents => {
-      intents = JSON.parse(JSON.stringify(intents.intents))
-      this.intentsList = intents;
-      for (let i = 0; i < intents.length; i++) {
-        const intentkey = String(intents[i]);
-        this.httpClient.get<any>(`http://localhost/api/intent?intent=${intentkey}`).subscribe(intent => {
-          // 
-          // 
-          this.intents.push(intent);
-          
-        })
-      }
-    })
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(NewintencomponentComponent, {
@@ -119,7 +108,7 @@ export class ChatbotComponent implements OnInit {
       
       if (result) {
         const body = { intents: [...this.intentsList, result] }
-        this.httpClient.post<any>(`http://localhost/api/intents`, body)
+        this.httpClient.post<any>(`${environment.BASE_PATH}/api/intents`, body)
           .subscribe(data => {
             
             this.init()
@@ -130,7 +119,7 @@ export class ChatbotComponent implements OnInit {
     });
   }
   retrainModel(){
-    this.httpClient.get<any>(`http://localhost/api/save`)
+    this.httpClient.get<any>(`${environment.BASE_PATH}/api/save`)
     .subscribe(data => {
       
     }
@@ -138,7 +127,7 @@ export class ChatbotComponent implements OnInit {
   }
   updatedIntent(intent: any, intentIndex: any) {
     const body = this.intents[intentIndex].intent;
-    this.httpClient.post<any>(`http://localhost/api/intent?intent=${intent}`, body)
+    this.httpClient.post<any>(`${environment.BASE_PATH}/api/intent?intent=${intent}`, body)
       .subscribe(data => console.log(data));
   }
   addIntent(intentIndex: any, type: any, intent: any) {
@@ -177,7 +166,7 @@ export class ChatbotComponent implements OnInit {
     this.sendMessage({"files":event.target.files,"message":""})
   }
   upload(data:any) {
-    const url = `http://localhost/api/upload`;
+    const url = `${environment.BASE_PATH}/api/upload`;
     let input = new FormData();
     input.append('busyboy', data);   // "url" as the key and "data" as value
     return this.httpClient.post(url, input).pipe(map((resp: any) => resp));
@@ -194,8 +183,10 @@ export class ChatbotComponent implements OnInit {
           avatar: 'https://i.pravatar.cc/300',
         },
       });
+      this.loading = true;
       this.upload(event.files[0]).subscribe(
         data => {
+          this.loading=false;
           this.messages.push({
             text: data.response,
             date: new Date(),
@@ -218,7 +209,7 @@ export class ChatbotComponent implements OnInit {
       },
     });
     let text = String(event.message)
-    this.httpClient.get<any>(`http://localhost/api?message=${text}`).subscribe(data => {
+    this.httpClient.get<any>(`${environment.BASE_PATH}/api/?message=${text}`).subscribe(data => {
       
       this.messages.push({
         text: data.response,

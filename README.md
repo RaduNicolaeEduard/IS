@@ -6,5 +6,3 @@ List of technologies:
 1. Angular
 2. Material Design
 3. Docker
-4. SpirngBoot
-5. Aiml

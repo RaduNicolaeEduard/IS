@@ -1,11 +1,21 @@
 <nb-layout>
 
   <nb-layout-header fixed>
-    <span>Ingenierie des systemes</span>
+    <span>{{ 'NAVBAR.TITLE' | translate }}</span>
     <span class="example-spacer"></span>
-    <button mat-flat-button routerLink="/">Chat Bot</button>
-    <button *ngIf="loggedIn" mat-flat-button routerLink="/admin">Admin</button>
-    <button mat-flat-button (click)="openBottomSheet()">Account</button>
+    <button nbButton ghost *ngIf="themeState=='default'" (click)="themeChange('dark')" status="primary"><nb-icon icon="moon-outline"></nb-icon></button>
+    <button nbButton ghost *ngIf="themeState=='dark'" (click)="themeChange('default')" status="primary"><nb-icon icon="sun-outline"></nb-icon></button>
+    <nb-form-field>
+      <nb-select [(ngModel)]="language" (selectedChange)="changeLang()">
+        <nb-option value="en">{{ 'NAVBAR.EN' | translate }}</nb-option>
+        <nb-option value="ro">{{ 'NAVBAR.RO' | translate }}</nb-option>
+        <nb-option value="fr">{{ 'NAVBAR.FR' | translate }}</nb-option>
+        <nb-option value="cr">{{ 'NAVBAR.CR' | translate }}</nb-option>
+      </nb-select>
+    </nb-form-field>
+    <button nbButton ghost routerLink="/">{{ 'NAVBAR.CHATBOT' | translate }}</button>
+    <button *ngIf="loggedIn" nbButton ghost routerLink="/admin">{{ 'NAVBAR.ADMIN' | translate }}</button>
+    <button nbButton ghost (click)="openBottomSheet()">{{ 'NAVBAR.ACCOUNT' | translate }}</button>
   </nb-layout-header>
   <nb-layout-column>
 
@@ -14,8 +24,7 @@
   </nb-layout-column>
 
   <nb-layout-footer fixed>
-    <p style="margin:0">made with <mat-icon style="font-size: 10px;width:10px;">favorite</mat-icon> by Nicolae, Sofia
-      and Ciuca</p>
+    <p style="margin:0">{{ 'NAVBAR.FOOTERSTART' | translate }} <mat-icon style="font-size: 10px;width:10px;">favorite</mat-icon> {{ 'NAVBAR.FOOTEREND' | translate }}</p>
   </nb-layout-footer>
 
 </nb-layout>
